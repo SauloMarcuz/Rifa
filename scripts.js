@@ -12,9 +12,8 @@ function submitRaffleForm() {
 
   // Faz uma solicitação HTTP POST para o GitHub API
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://api.github.com/repos/SEU_USUARIO/SEU_REPOSITORIO/contents/respostas.json', true);
-  xhr.setRequestHeader('Authorization', 'Bearer SEU_TOKEN_DE_AUTORIZACAO');
-
+  xhr.open('POST', 'https://api.github.com/repos/saulomarcuz/rifa-isis/contents/respostas.json', true);
+  xhr.setRequestHeader('Authorization', 'Bearer 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');
   xhr.onload = function() {
     if (xhr.status === 201) {
       alert('Respostas enviadas com sucesso!');
