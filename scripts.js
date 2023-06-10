@@ -1,54 +1,72 @@
-var selectedNumbers = [];
-var participants = [];
+const numbersContainer = document.querySelector('.numbers-container');
+const participantList = document.getElementById('participant-list');
+const formInput = document.getElementById('name');
 
-function toggleSelected(number) {
-  var element = document.getElementById(number);
-  if (element.classList.contains('selected')) {
-    element.classList.remove('selected');
-    var index = selectedNumbers.indexOf(number);
-    if (index !== -1) {
-      selectedNumbers.splice(index, 1);
+const numbers = Array.from({ length: 100 }, (_, i) => i + 1);
+let selectedNumbers = [];
+let participants = [];
+
+// Função para atualizar a lista de números selecionados
+function updateSelectedNumbers() {
+  numbersContainer.innerHTML = '';
+
+  numbers.forEach(number => {
+    const numberElement = document.createElement('div');
+    numberElement.classList.add('number');
+    numberElement.textContent = number;
+
+    if (selectedNumbers.includes(number)) {
+      numberElement.classList.add('selected');
+      numberElement.setAttribute('disabled', true);
     }
-  } else {
-    element.classList.add('selected');
-    selectedNumbers.push(number);
-  }
+
+    numberElement.addEventListener('click', () => {
+      if (!numberElement.classList.contains('selected')) {
+        numberElement.classList.add('selected');
+        selectedNumbers.push(number);
+      } else {
+        numberElement.classList.remove('selected');
+        selectedNumbers = selectedNumbers.filter(n => n !== number);
+      }
+    });
+
+    numbersContainer.appendChild(numberElement);
+  });
 }
 
+// Função para atualizar a lista de participantes
+function updateParticipantList() {
+  participantList.innerHTML = '';
+
+  participants.forEach(participant => {
+    const listItem = document.createElement('li');
+    listItem.classList.add('list-item');
+    listItem.textContent = `${participant.name} - Números: ${participant.numbers.join(', ')}`;
+
+    participantList.appendChild(listItem);
+  });
+}
+
+// Função para confirmar a participação
 function submitRaffleForm() {
-  var name = document.getElementById('name').value;
+  const name = formInput.value.trim();
 
-  if (name === '') {
-    alert('Por favor, digite seu nome.');
-    return;
+  if (name && selectedNumbers.length > 0) {
+    const participant = {
+      name: name,
+      numbers: selectedNumbers
+    };
+
+    participants.push(participant);
+    formInput.value = '';
+    selectedNumbers = [];
+
+    updateSelectedNumbers();
+    updateParticipantList();
+  } else {
+    alert('Por favor, preencha o nome e selecione pelo menos um número.');
   }
-
-  if (selectedNumbers.length === 0) {
-    alert('Por favor, selecione pelo menos um número.');
-    return;
-  }
-
-  var participant = {
-    name: name,
-    numbers: selectedNumbers
-  };
-
-  participants.push(participant);
-
-  var participantItem = document.createElement('li');
-  participantItem.textContent = participant.name + ': ' + participant.numbers.join(', ');
-
-  var participantsList = document.getElementById('participants');
-  participantsList.appendChild(participantItem);
-
-  // Limpar seleção e nome
-  var numberElements = document.getElementsByClassName('number');
-  for (var i = 0; i < numberElements.length; i++) {
-    var numberElement = numberElements[i];
-    if (numberElement.classList.contains('selected')) {
-      numberElement.classList.remove('selected');
-    }
-  }
-  document.getElementById('name').value = '';
-  selectedNumbers = [];
 }
+
+// Inicialização da página
+updateSelectedNumbers();
