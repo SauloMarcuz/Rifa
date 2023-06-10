@@ -1,8 +1,64 @@
 /* Estilos existentes */
 
+body {
+  background-color: #FCEFF7;
+  color: #7F007F;
+  text-align: center;
+}
+
+.title {
+  color: #7F007F;
+}
+
+.raffle-board {
+  margin-top: 20px;
+}
+
+.numbers-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border: 1px solid #7F007F;
+  border-radius: 50%;
+  background-color: #FCEFF7;
+  color: #7F007F;
+  cursor: pointer;
+}
+
+.number.selected {
+  background-color: #7F007F;
+  color: #FCEFF7;
+}
+
+.prize-info {
+  margin-bottom: 20px;
+}
+
+.instructions {
+  margin-bottom: 20px;
+}
+
+.participant-list {
+  margin-top: 20px;
+  text-align: left;
+}
+
+/* Novos estilos para a lista de participantes */
+
 .list-heading {
   color: #7F007F;
-  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .list {
