@@ -1,0 +1,68 @@
+body {
+  background-color: #FCEFF7;
+  color: #7F007F;
+  text-align: center;
+}
+
+.prize-info {
+  margin-bottom: 20px;
+}
+
+.instructions {
+  margin-bottom: 20px;
+}
+
+.numbers-container {
+  display: inline-block;
+  text-align: center;
+}
+
+.numbers-row {
+  margin-bottom: 10px;
+}
+
+.number {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  border: 1px solid #7F007F;
+  border-radius: 50%;
+  background-color: #FCEFF7;
+  color: #7F007F;
+  cursor: pointer;
+}
+
+.number.selected {
+  background-color: #7F007F;
+  color: #FCEFF7;
+}
+
+.number.selected-previously {
+  background-color: #FFC0CB;
+  color: #7F007F;
+}
+
+.participant-form {
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"] {
+  width: 200px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #7F007F;
+  color: #FCEFF7;
+  border: none;
+  cursor: pointer;
+}
