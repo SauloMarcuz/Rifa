@@ -80,7 +80,7 @@ function submitRaffleForm() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'respostas.json';
+    link.download = 'https://github.com/SauloMarcuz/rifa-isis/blob/Saulo/respostas.json';
     link.click();
   } else {
     alert('Por favor, preencha o nome e selecione pelo menos um número.');
