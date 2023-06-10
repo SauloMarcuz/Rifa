@@ -1,0 +1,16 @@
+/* Estilos existentes */
+
+.list-heading {
+  color: #7F007F;
+  margin-top: 20px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  margin-bottom: 5px;
+}
