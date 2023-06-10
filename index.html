@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chá Rifa da Ísis</title>
+  <style>
+    body {
+      background-color: #FCEFF7;
+      color: #7F007F;
+      text-align: center;
+    }
+
+    .prize-info {
+      margin-bottom: 20px;
+    }
+
+    .instructions {
+      margin-bottom: 20px;
+    }
+
+    .numbers-container {
+      display: inline-block;
+      text-align: center;
+    }
+
+    .numbers-row {
+      margin-bottom: 10px;
+    }
+
+    .number {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      margin: 5px;
+      border: 1px solid #7F007F;
+      border-radius: 50%;
+      background-color: #FCEFF7;
+      color: #7F007F;
+      cursor: pointer;
+    }
+
+    .number.selected {
+      background-color: #7F007F;
+      color: #FCEFF7;
+    }
+
+    .number.selected-previously {
+      background-color: #FFC0CB;
+      color: #7F007F;
+    }
+
+    .participant-form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+      width: 200px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #7F007F;
+      color: #FCEFF7;
+      border: none;
+      cursor: pointer;
+    }
+ </style>
+</head>
+<body>
+  <h1 style="color: #7F007F;">Chá Rifa da Ísis</h1>
+  <img src="https://github.com/SauloMarcuz/rifa-isis/raw/Saulo/Rifa.jpeg" alt="">
+  <div class="prize-info">
+    <p style="color: #7F007F;">Prêmio: R$150,00</p>
+    <p style="color: #7F007F;">Do número 1 ao 35: Pacote de fralda tamanho P</p>
+    <p style="color: #7F007F;">Do número 36 ao 70: Pacote de fralda tamanho M</p>
+    <p style="color: #7F007F;">Do número 71 ao 100: Pacote de fralda tamanho G</p>
+  </div>
+  <div class="instructions">
+    <p style="color: #7F007F;">Instruções:</p>
+    <ol style="color: #7F007F; text-align: left;">
+      <li>Escolha um número de 1 a 100</li>
+      <li>Verifique se o número escolhido está disponível</li>
+      <li>Cada número corresponde a um pacote de fralda ou a um PIX no valor de R$30,00 - Chave PIX (15) 99822-5420</li>
+      <li>Combine a entrega do pacote de fralda</li>
+    </ol>
+  </div>
+  <div class="raffle-board">
+    <div class="numbers-container">
+      <div class="numbers-row">
+        <div id="1" class="number" onclick="toggleSelected(1)">1</div>
+        <div id="2" class="number" onclick="toggleSelected(2)">2</div>
+        <!-- Adicione os números restantes aqui -->
+        <script>
+          var selectedNumbers = [];
+
+          function toggleSelected(number) {
+            var element = document.getElementById(number);
+            if (selectedNumbers.includes(number)) {
+              return; // O número já foi selecionado anteriormente, não faz nada
+            }
+            if (element.classList.contains('selected')) {
+              element.classList.remove('selected');
+              var index = selectedNumbers.indexOf(number);
+              if (index > -1) {
+                selectedNumbers.splice(index, 1);
+              }
+            } else {
+              element.classList.add('selected');
+              selectedNumbers.push(number);
+            }
+          }
+
+          var numbersContainer = document.querySelector('.numbers-row');
+
+          for (var i = 3; i <= 100; i++) {
+            var numberDiv = document.createElement('div');
+            numberDiv.setAttribute('class', 'number');
+            numberDiv.setAttribute('id', i);
+            numberDiv.setAttribute('onclick', 'toggleSelected(' + i + ')');
+            numberDiv.innerText = i;
+            numbersContainer.appendChild(numberDiv);
+          }
+        </script>
+      </div>
+      <!-- Adicione as outras linhas de números aqui -->
+    </div>
+  </div>
+  <div class="participant-form">
+    <label for="name" style="color: #7F007F;">Nome Completo:</label>
+    <input type="text" id="name">
+    <button onclick="submitRaffleForm()">Confirmar</button>
+  </div>
+  <script>
+    function submitRaffleForm() {
+      var name = document.getElementById('name').value;
+
+      var data = 'Número(s) selecionado(s): ' + selectedNumbers.join(', ') + '\nNome: ' + name;
+      var file = new Blob([data], {type: 'text/plain'});
+
+      var a = document.createElement('a');
+      var url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = 'respostas.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
