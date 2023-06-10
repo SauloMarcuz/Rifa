@@ -1,0 +1,91 @@
+body {
+  background-color: #FCEFF7;
+  color: #7F007F;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  color: #7F007F;
+}
+
+.prize-text {
+  color: #7F007F;
+}
+
+.instructions-text {
+  color: #7F007F;
+  text-align: left;
+}
+
+.instructions-list {
+  color: #7F007F;
+  text-align: left;
+}
+
+.raffle-board {
+  margin-top: 20px;
+}
+
+.numbers-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 10px;
+  text-align: center;
+}
+
+.number {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  border: 1px solid #7F007F;
+  border-radius: 50%;
+  background-color: #FCEFF7;
+  color: #7F007F;
+  cursor: pointer;
+}
+
+.number.selected {
+  background-color: #7F007F;
+  color: #FCEFF7;
+}
+
+.participant-form {
+  margin-top: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  width: 200px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.form-button {
+  padding: 10px 20px;
+  background-color: #7F007F;
+  color: #FCEFF7;
+  border: none;
+  cursor: pointer;
+}
+
+.list-heading {
+  color: #7F007F;
+  margin-top: 20px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  margin-bottom: 5px;
+}
