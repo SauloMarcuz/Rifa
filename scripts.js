@@ -1,4 +1,4 @@
-const participanteForm = document.getElementById('participant-form');
+const participantForm = document.getElementById('participant-form');
 const formInput = document.getElementById('name');
 const numberContainer = document.querySelector('.numbers-container');
 const participantList = document.getElementById('participant-list');
@@ -77,12 +77,12 @@ function submitRaffleForm() {
 
     // Salvar os participantes no arquivo respostas.json usando a API do GitHub
     const jsonData = JSON.stringify(participants);
-    const octokit = new Octokit({ auth: "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" });
+    const octokit = new Octokit({ auth: "SEU_TOKEN_DE_ACESSO_PESSOAL" });
 
     octokit.repos.createOrUpdateFileContents({
       owner: "SauloMarcuz",
       repo: "rifa-isis",
-         path: "https://github.com/SauloMarcuz/rifa-isis/blob/Saulo/respostas.json",
+      path: "respostas.json",
       message: "Atualizar arquivo respostas.json",
       content: Buffer.from(jsonData).toString('base64'),
       branch: "Saulo"
@@ -98,3 +98,9 @@ function submitRaffleForm() {
 
 // Inicialização da página
 updateSelectedNumbers();
+
+// Adicionar o evento de envio do formulário
+participantForm.addEventListener('submit', event => {
+  event.preventDefault();
+  submitRaffleForm();
+});
