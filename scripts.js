@@ -76,28 +76,28 @@ function submitRaffleForm() {
 
     // Salvar os participantes no arquivo answers.json usando a API do GitHub
     const jsonData = JSON.stringify(participants);
-    const githubApiUrl = 'https://github.com/SauloMarcuz/rifa-isis/blob/Saulo/answers.json';
-    const token = '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';
+    const githubApiUrl = "https://github.com/SauloMarcuz/rifa-isis/blob/Saulo/answers.json";
+    const githubToken = "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";
 
     fetch(githubApiUrl, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${githubToken}`,
+        Accept: "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        message: 'Atualizar arquivo answers.json',
-        content: Buffer.from(jsonData).toString('base64'),
-        branch: 'main',
+        message: "Atualizar arquivo answers.json",
+        content: btoa(jsonData), // Codificar em base64 usando btoa
+        branch: "main",
       }),
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Dados salvos com sucesso!');
+        console.log("Dados salvos com sucesso!");
       })
       .catch(error => {
-        console.error('Erro ao salvar os dados:', error);
+        console.error("Erro ao salvar os dados:", error);
       });
   } else {
     alert('Por favor, preencha o nome e selecione pelo menos um número.');
