@@ -16,15 +16,40 @@ function submitRaffleForm() {
     updateParticipantList();
 
     // Estruturação dos números
-    const structuredNumbers = Array.from({ length: 100 }, (_, i) => ({
-      number: i + 1,
-      taken: isNumberTaken(i + 1)
-    }));
+  const numberContainer = document.querySelector('.numbers-container');
+const participantList = document.getElementById('participant-list');
 
-    const jsonData = JSON.stringify({
-      participants: participants,
-      numbers: structuredNumbers
+const numbers = Array.from({ length: 100 }, (_, i) => i + 1);
+let selectedNumbers = [];
+let participants = [];
+
+// Função para atualizar a lista de números selecionados
+function updateSelectedNumbers() {
+  numberContainer.innerHTML = '';
+
+  numbers.forEach(number => {
+    const numberElement = document.createElement('div');
+    numberElement.classList.add('number');
+    numberElement.textContent = number;
+
+    if (selectedNumbers.includes(number) || isNumberTaken(number)) {
+      numberElement.classList.add('selected');
+      numberElement.setAttribute('disabled', true);
+    }
+
+    numberElement.addEventListener('click', () => {
+      if (!numberElement.classList.contains('selected')) {
+        numberElement.classList.add('selected');
+        selectedNumbers.push(number);
+      } else {
+        numberElement.classList.remove('selected');
+        selectedNumbers = selectedNumbers.filter(n => n !== number);
+      }
     });
+
+    numberContainer.appendChild(numberElement);
+  });
+}
 
     // Salvar os participantes no arquivo answers.json usando a API do GitHub
     const githubApiUrl = "https://api.github.com/repos/SauloMarcuz/rifa-isis/contents/answers.json";
