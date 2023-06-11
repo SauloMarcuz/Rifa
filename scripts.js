@@ -82,8 +82,8 @@ function submitRaffleForm() {
     octokit.repos.createOrUpdateFileContents({
       owner: "SauloMarcuz",
       repo: "rifa-isis",
-      path: "respostas.json",
-      message: "Atualizar arquivo respostas.json",
+      path: "answers.json",
+      message: "Atualizar arquivo answers.json",
       content: Buffer.from(jsonData).toString('base64'),
       branch: "Saulo"
     }).then(() => {
