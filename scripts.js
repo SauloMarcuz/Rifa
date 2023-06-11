@@ -77,7 +77,7 @@ function submitRaffleForm() {
 
     // Salvar os participantes no arquivo respostas.json usando a API do GitHub
     const jsonData = JSON.stringify(participants);
-    const octokit = new Octokit({ auth: "SEU_TOKEN_DE_ACESSO_PESSOAL" });
+    const octokit = new Octokit({ auth: "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" });
 
     octokit.repos.createOrUpdateFileContents({
       owner: "SauloMarcuz",
