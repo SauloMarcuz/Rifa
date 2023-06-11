@@ -73,25 +73,6 @@ function submitRaffleForm() {
 
     updateSelectedNumbers();
     updateParticipantList();
-
-    // Salvar os participantes no arquivo answers.json usando a API do GitHub
-    const jsonData = JSON.stringify(participants);
-    const { Octokit } = require("@octokit/rest");
-
-    const octokit = new Octokit({ auth: "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" });
-
-    octokit.repos.createOrUpdateFileContents({
-      owner: "SauloMarcuz",
-      repo: "rifa-isis",
-      path: "answers.json",
-      message: "Atualizar arquivo answers.json",
-      content: Buffer.from(jsonData).toString('base64'),
-      branch: "Saulo"
-    }).then(() => {
-      console.log("Dados salvos com sucesso!");
-    }).catch(error => {
-      console.error("Erro ao salvar os dados:", error);
-    });
   } else {
     alert('Por favor, preencha o nome e selecione pelo menos um número.');
   }
