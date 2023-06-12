@@ -1,12 +1,11 @@
 const formEntrada = document.getElementById('name');
 const numberContainer = document.querySelector('.numbers-container');
-const participanteLista = document.getElementById('lista-participantes'); // Alterado para "lista-participantes"
+const participanteLista = document.getElementById('participant-list');
 
 const numeros = Array.from({ length: 100 }, (_, i) => i + 1);
 let numerosSelecionados = [];
 let participantes = [];
 
-// Função para atualizar a lista de números selecionados
 function atualizarNumerosSelecionados() {
   numberContainer.innerHTML = '';
 
@@ -34,7 +33,6 @@ function atualizarNumerosSelecionados() {
   });
 }
 
-// Função para verificar se um número já foi selecionado por outro participante
 function isNumeroUtilizado(numero) {
   for (const participante of participantes) {
     if (participante.numeros.includes(numero)) {
@@ -44,7 +42,6 @@ function isNumeroUtilizado(numero) {
   return false;
 }
 
-// Função para atualizar a lista de participantes
 function atualizarListaParticipantes() {
   participanteLista.innerHTML = '';
 
@@ -57,7 +54,6 @@ function atualizarListaParticipantes() {
   });
 }
 
-// Função para confirmar uma participação
 function submitRaffleForm() {
   const nome = formEntrada.value.trim();
 
@@ -74,7 +70,6 @@ function submitRaffleForm() {
     atualizarNumerosSelecionados();
     atualizarListaParticipantes();
 
-    // Salvar os participantes no arquivo answers.json usando a API do GitHub
     const jsonData = JSON.stringify(participantes);
     const githubApiUrl = 'https://api.github.com/repos/SauloMarcuz/rifa-isis/contents/answers.json';
     const githubToken = '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';
@@ -89,9 +84,15 @@ function submitRaffleForm() {
       body: JSON.stringify({
         message: 'Atualizar arquivo answers.json',
         content: btoa(jsonData),
-        branch: 'principal',
+        branch: 'Saulo',
       }),
     })
       .then(response => response.json())
       .then(data => {
-        console
+        console.log('Dados salvos com sucesso!');
+      })
+      .catch(error => {
+        console.error('Erro ao salvar os dados:', error);
+      });
+  }
+}
