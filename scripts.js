@@ -1,8 +1,8 @@
-const formEntrada = document.getElementById('nome');
+const formEntrada = document.getElementById('name');
 const numberContainer = document.querySelector('.numbers-container');
 const participanteLista = document.getElementById('lista-participantes');
 
-const numeros = Array.from({ comprimento: 100 }, (_, i) => i + 1);
+const numeros = Array.from({ length: 100 }, (_, i) => i + 1);
 let numerosSelecionados = [];
 let participantes = [];
 
@@ -58,7 +58,7 @@ function atualizarListaParticipantes() {
 }
 
 // Função para confirmar uma participação
-function enviarFormularioRifa() {
+function submitRaffleForm() {
   const nome = formEntrada.value.trim();
 
   if (nome && numerosSelecionados.length > 0) {
