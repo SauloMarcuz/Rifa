@@ -1,6 +1,6 @@
 const formEntrada = document.getElementById('name');
 const numberContainer = document.querySelector('.numbers-container');
-const participanteLista = document.getElementById('lista-participantes');
+const participanteLista = document.getElementById('participant-list');
 
 const numeros = Array.from({ length: 100 }, (_, i) => i + 1);
 let numerosSelecionados = [];
