@@ -12,7 +12,7 @@ function atualizarNumerosSelecionados() {
 
   numeros.forEach(numero => {
     const numeroElemento = document.createElement('div');
-    numeroElemento.classList.add('numero');
+    numeroElemento.classList.add('number');
     numeroElemento.textContent = numero;
 
     if (numerosSelecionados.includes(numero) || isNumeroUtilizado(numero)) {
