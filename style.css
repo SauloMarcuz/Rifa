@@ -1,95 +1,100 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f3f3f3;
+    background-color: #FCEFF7;
+    color: #7F007F;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .title {
-  text-align: center;
-  margin-top: 20px;
+    color: #7F007F;
+    margin-top: 20px;
 }
 
 .prize-info {
-  text-align: center;
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .prize-text {
-  margin: 5px;
+    color: #7F007F;
 }
 
 .instructions {
-  text-align: center;
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .instructions-text {
-  font-weight: bold;
+    color: #7F007F;
 }
 
 .instructions-list {
-  margin: 0;
-  padding-left: 20px;
+    color: #7F007F;
+    text-align: left;
 }
 
 .raffle-board {
-  display: flex;
-  justify-content: center;
+    margin-bottom: 20px;
 }
 
 .numbers-container {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 10px;
-  width: 400px;
-  margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
 }
 
 .number {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  cursor: pointer;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin: 5px;
+    border: 1px solid #7F007F;
+    border-radius: 50%;
+    background-color: #FCEFF7;
+    color: #7F007F;
+    cursor: pointer;
 }
 
 .number.selected {
-  background-color: #ffcc00;
+    background-color: #7F007F;
+    color: #FCEFF7;
+}
+
+.number[selected] {
+    background-color: #7F007F;
+    color: #FCEFF7;
+    pointer-events: none;
 }
 
 .participant-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .form-label {
-  margin-right: 10px;
+    display: block;
+    margin-bottom: 10px;
+    color: #7F007F;
 }
 
 .form-input {
-  width: 200px;
-  padding: 5px;
+    padding: 5px;
 }
 
 .form-button {
-  padding: 5px 10px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+    padding: 5px 10px;
+    background-color: #7F007F;
+    color: #FCEFF7;
+    border: none;
+    cursor: pointer;
 }
 
 .participant-list {
-  margin-top: 20px;
-  padding-left: 20px;
+    margin-top: 20px;
+    padding-left: 20px;
 }
 
 .list-item {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
+    color: #7F007F;
 }
