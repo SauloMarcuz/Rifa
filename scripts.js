@@ -59,7 +59,8 @@ function atualizarListaParticipantes() {
 
 // Função para confirmar uma participação
 function submitRaffleForm() {
-  const nome = formEntrada.value.trim();
+  const nome = document.getElementById('name').value.trim();
+
 
   if (nome && numerosSelecionados.length > 0) {
     const participante = {
