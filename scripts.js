@@ -89,7 +89,7 @@ function submitRaffleForm() {
       body: JSON.stringify({
         message: 'Atualizar arquivo answers.json',
         content: btoa(jsonData),
-        branch: 'Saulo',
+        branch: 'principal',
       }),
     })
       .then(response => response.json())
