@@ -1,109 +1,109 @@
-const  formEntrada  =  documento . getElementById ( 'nome' ) ;
-const  numberContainer  =  documento . querySelector ( '.numbers-container' ) ;
-const  participanteLista  =  documento . getElementById ( 'lista de participantes' ) ;
+const formEntrada = document.getElementById('nome');
+const numberContainer = document.querySelector('.numbers-container');
+const participanteLista = document.getElementById('lista-participantes');
 
- números  const =  Array . from ( {  comprimento : 100  } ,  ( _ ,  i )  =>  i  +  1 ) ;
-deixe  Números selecionados  =  [ ] ;
-deixe  os participantes  =  [ ] ;
+const numeros = Array.from({ comprimento: 100 }, (_, i) => i + 1);
+let numerosSelecionados = [];
+let participantes = [];
 
 // Função para atualizar a lista de números selecionados
-function  updateSelectedNumbers ( )  {
-  numberContainer . innerHTML  =  '' ;
+function atualizarNumerosSelecionados() {
+  numberContainer.innerHTML = '';
 
-  números . forCada ( número  =>  {
-    const  numeroElemento  =  documento . createElement ( 'div' ) ;
-    númeroElemento . classList . adicionar ( 'número' ) ;
-    númeroElemento . textoConteúdo  =  número ;
+  numeros.forEach(numero => {
+    const numeroElemento = document.createElement('div');
+    numeroElemento.classList.add('numero');
+    numeroElemento.textContent = numero;
 
-    if  ( números selecionados . inclui ( número )  ||  isNumberTaken ( número ) )  {
-      númeroElemento . classList . add ( 'selecionado' ) ;
-      númeroElemento . setAttribute ( 'desabilitado' ,  verdadeiro ) ;
+    if (numerosSelecionados.includes(numero) || isNumeroUtilizado(numero)) {
+      numeroElemento.classList.add('selecionado');
+      numeroElemento.setAttribute('desabilitado', true);
     }
 
-    númeroElemento . addEventListener ( 'clique' ,  ( )  =>  {
-      if  ( ! numberElement . classList . contém ( 'selecionado' ) )  {
-        númeroElemento . classList . add ( 'selecionado' ) ;
-        Números selecionados . empurre ( número ) ;
-      }  senão  {
-        númeroElemento . classList . remover ( 'selecionado' ) ;
-        números selecionados  =  números selecionados . filtro ( n  =>  n  !==  número ) ;
+    numeroElemento.addEventListener('click', () => {
+      if (!numeroElemento.classList.contains('selecionado')) {
+        numeroElemento.classList.add('selecionado');
+        numerosSelecionados.push(numero);
+      } else {
+        numeroElemento.classList.remove('selecionado');
+        numerosSelecionados = numerosSelecionados.filter(n => n !== numero);
       }
-    } ) ;
+    });
 
-    numberContainer . appendChild ( númeroElemento ) ;
-  } ) ;
+    numberContainer.appendChild(numeroElemento);
+  });
 }
 
 // Função para verificar se um número já foi selecionado por outro participante
-função  éNumberTaken ( número )  {
-  for  ( const  participante  de  participantes )  {
-    if  ( participante . números . inclui ( número ) )  {
-      retorna  verdadeiro ;
+function isNumeroUtilizado(numero) {
+  for (const participante of participantes) {
+    if (participante.numeros.includes(numero)) {
+      return true;
     }
   }
-  retorna  falso ;
+  return false;
 }
 
 // Função para atualizar a lista de participantes
-function  updateParticipantList ( )  {
-  lista de participantes . innerHTML  =  '' ;
+function atualizarListaParticipantes() {
+  participanteLista.innerHTML = '';
 
-  participantes . forCada ( participante  =>  {
-    const  itemlista  =  documento . criarElemento ( 'li' ) ;
-    listaItem . classList . add ( 'lista-item' ) ;
-    listaItem . textContent  =  ` ${ participante . nome } - Números: ${ participante . números . join ( ', ' ) } ` ;
+  participantes.forEach(participante => {
+    const itemLista = document.createElement('li');
+    itemLista.classList.add('item-lista');
+    itemLista.textContent = `${participante.nome} - Números: ${participante.numeros.join(', ')}`;
 
-    lista de participantes . appendChild ( listItem ) ;
-  } ) ;
+    participanteLista.appendChild(itemLista);
+  });
 }
 
 // Função para confirmar uma participação
-função  enviarRaffleForm ( )  {
-  const  nome  =  formInput . valor . aparar ( ) ;
+function enviarFormularioRifa() {
+  const nome = formEntrada.value.trim();
 
-  if  ( nome  &&  números selecionados . comprimento  >  0 )  {
-     participante  constante =  {
-      nome : nome ,
-      números : números selecionados
-    } ;
+  if (nome && numerosSelecionados.length > 0) {
+    const participante = {
+      nome: nome,
+      numeros: numerosSelecionados
+    };
 
-    participantes . empurrar ( participante ) ;
-    formInput . valor  =  '' ;
-    Números selecionados  =  [ ] ;
+    participantes.push(participante);
+    formEntrada.value = '';
+    numerosSelecionados = [];
 
-    atualizarNúmerosSelecionados ( ) ;
-    atualizarParticipantList ( ) ;
+    atualizarNumerosSelecionados();
+    atualizarListaParticipantes();
 
-    // Salvar os participantes no arquivo answers.json using a API do GitHub
-    const  jsonData  =  JSON . stringify ( participantes ) ;
-    const  githubApiUrl  =  'https://api.github.com/repos/SauloMarcuz/rifa-isis/contents/answers.json' ;
-    const  githubToken  =  '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' ;
+    // Salvar os participantes no arquivo answers.json usando a API do GitHub
+    const jsonData = JSON.stringify(participantes);
+    const githubApiUrl = 'https://api.github.com/repos/SauloMarcuz/rifa-isis/contents/answers.json';
+    const githubToken = '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';
 
-    buscar ( githubApiUrl ,  {
-      método : 'PUT' ,
-      cabeçalhos : {
-        Autorização : `Bearer ${ githubToken } ` ,
-        Aceitar : 'application/vnd.github.v3+json' ,
-        'Tipo de conteúdo' : 'aplicativo/json' ,
-      } ,
-      corpo : JSON . stringify ( {
-        message : 'Atualizar arquivo answers.json' ,
-        conteúdo : btoa ( jsonData ) ,
-        ramificação : 'principal' ,
-      } ) ,
-    } )
-      . então ( resposta  =>  resposta . json ( ) )
-      . então ( dados  =>  {
-        console . log ( 'Dados salvos com sucesso!' ) ;
-      } )
-      . pegar ( erro  =>  {
-        console . error ( 'Erro ao salvar os dados:' ,  error ) ;
-      } ) ;
-  }  senão  {
-    alert ( 'Por favor, preencha o nome e selecione pelo menos um número.' ) ;
+    fetch(githubApiUrl, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${githubToken}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: 'Atualizar arquivo answers.json',
+        content: btoa(jsonData),
+        branch: 'principal',
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Dados salvos com sucesso');
+      })
+      .catch(error => {
+        console.error('Erro ao salvar os dados:', error);
+      });
+  } else {
+    alert('Por favor, preencha o nome e selecione pelo menos um número.');
   }
 }
 
 // Inicialização da página
-atualizarNúmerosSelecionados ( ) ;
-atualizarParticipantList ( ) ;
+atualizarNumerosSelecionados();
+atualizarListaParticipantes();
