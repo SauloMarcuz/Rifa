@@ -70,33 +70,35 @@ function submitRaffleForm() {
         atualizarNumerosSelecionados();
         atualizarListaParticipantes();
 
-        // Enviar dados para answers.json
-        const data = {
-            nome: participante.nome,
-            numeros: participante.numeros
-        };
+        const jsonData = JSON.stringify(participantes);
 
-        fetch('answers.json', {
-            method: 'POST',
+        // Salvar os participantes no arquivo answers.json usando a API do Github
+        const githubApiUrl = 'https://api.github.com/repos/SauloMarcuz/rifa-isis/contents/answers.json';
+        const githubToken = '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';
+
+        fetch(githubApiUrl, {
+            method: 'PUT',
             headers: {
+                Authorization: `Bearer ${githubToken}`,
+                Accept: 'application/vnd.github.v3+json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify({
+                message: 'Atualizar answers.json',
+                content: btoa(jsonData),
+                sha: ''
+            })
         })
-        .then(response => {
-            if (response.ok) {
-                console.log('Dados enviados com sucesso.');
-            } else {
-                console.error('Ocorreu um erro ao enviar os dados.');
-            }
-        })
-        .catch(error => {
-            console.error('Ocorreu um erro ao enviar os dados:', error);
-        });
-    } else {
-        alert('Por favor, preencha o nome e selecione pelo menos um número.');
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error));
     }
 }
 
-atualizarNumerosSelecionados();
-atualizarListaParticipantes();
+document.addEventListener('DOMContentLoaded', () => {
+    atualizarNumerosSelecionados();
+    formEntrada.addEventListener('submit', e => {
+        e.preventDefault();
+        submitRaffleForm();
+    });
+});
