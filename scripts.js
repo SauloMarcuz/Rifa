@@ -69,6 +69,30 @@ function submitRaffleForm() {
 
         atualizarNumerosSelecionados();
         atualizarListaParticipantes();
+
+        // Enviar dados para answers.json
+        const data = {
+            nome: participante.nome,
+            numeros: participante.numeros
+        };
+
+        fetch('answers.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Dados enviados com sucesso.');
+            } else {
+                console.error('Ocorreu um erro ao enviar os dados.');
+            }
+        })
+        .catch(error => {
+            console.error('Ocorreu um erro ao enviar os dados:', error);
+        });
     } else {
         alert('Por favor, preencha o nome e selecione pelo menos um número.');
     }
