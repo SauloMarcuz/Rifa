@@ -1,43 +1,43 @@
-const formInput = document.getElementById('name');
+const formEntrada = document.getElementById('nome');
 const numberContainer = document.querySelector('.numbers-container');
-const participantList = document.getElementById('participant-list');
+const participanteLista = document.getElementById('lista-participantes');
 
-const numbers = Array.from({ length: 100 }, (_, i) => i + 1);
-let selectedNumbers = [];
-let participants = [];
+const numeros = Array.from({ comprimento: 100 }, (_, i) => i + 1);
+let numerosSelecionados = [];
+let participantes = [];
 
 // Função para atualizar a lista de números selecionados
-function updateSelectedNumbers() {
+function atualizarNumerosSelecionados() {
   numberContainer.innerHTML = '';
 
-  numbers.forEach(number => {
-    const numberElement = document.createElement('div');
-    numberElement.classList.add('number');
-    numberElement.textContent = number;
+  numeros.forEach(numero => {
+    const numeroElemento = document.createElement('div');
+    numeroElemento.classList.add('numero');
+    numeroElemento.textContent = numero;
 
-    if (selectedNumbers.includes(number) || isNumberTaken(number)) {
-      numberElement.classList.add('selected');
-      numberElement.setAttribute('disabled', true);
+    if (numerosSelecionados.includes(numero) || isNumeroUtilizado(numero)) {
+      numeroElemento.classList.add('selecionado');
+      numeroElemento.setAttribute('desabilitado', true);
     }
 
-    numberElement.addEventListener('click', () => {
-      if (!numberElement.classList.contains('selected')) {
-        numberElement.classList.add('selected');
-        selectedNumbers.push(number);
+    numeroElemento.addEventListener('click', () => {
+      if (!numeroElemento.classList.contains('selecionado')) {
+        numeroElemento.classList.add('selecionado');
+        numerosSelecionados.push(numero);
       } else {
-        numberElement.classList.remove('selected');
-        selectedNumbers = selectedNumbers.filter(n => n !== number);
+        numeroElemento.classList.remove('selecionado');
+        numerosSelecionados = numerosSelecionados.filter(n => n !== numero);
       }
     });
 
-    numberContainer.appendChild(numberElement);
+    numberContainer.appendChild(numeroElemento);
   });
 }
 
 // Função para verificar se um número já foi selecionado por outro participante
-function isNumberTaken(number) {
-  for (const participant of participants) {
-    if (participant.numbers.includes(number)) {
+function isNumeroUtilizado(numero) {
+  for (const participante of participantes) {
+    if (participante.numeros.includes(numero)) {
       return true;
     }
   }
@@ -45,37 +45,37 @@ function isNumberTaken(number) {
 }
 
 // Função para atualizar a lista de participantes
-function updateParticipantList() {
-  participantList.innerHTML = '';
+function atualizarListaParticipantes() {
+  participanteLista.innerHTML = '';
 
-  participants.forEach(participant => {
-    const listItem = document.createElement('li');
-    listItem.classList.add('list-item');
-    listItem.textContent = `${participant.name} - Números: ${participant.numbers.join(', ')}`;
+  participantes.forEach(participante => {
+    const itemLista = document.createElement('li');
+    itemLista.classList.add('item-lista');
+    itemLista.textContent = `${participante.nome} - Números: ${participante.numeros.join(', ')}`;
 
-    participantList.appendChild(listItem);
+    participanteLista.appendChild(itemLista);
   });
 }
 
 // Função para confirmar uma participação
-function submitRaffleForm() {
-  const name = formInput.value.trim();
+function enviarFormularioRifa() {
+  const nome = formEntrada.value.trim();
 
-  if (name && selectedNumbers.length > 0) {
-    const participant = {
-      name: name,
-      numbers: selectedNumbers
+  if (nome && numerosSelecionados.length > 0) {
+    const participante = {
+      nome: nome,
+      numeros: numerosSelecionados
     };
 
-    participants.push(participant);
-    formInput.value = '';
-    selectedNumbers = [];
+    participantes.push(participante);
+    formEntrada.value = '';
+    numerosSelecionados = [];
 
-    updateSelectedNumbers();
-    updateParticipantList();
+    atualizarNumerosSelecionados();
+    atualizarListaParticipantes();
 
     // Salvar os participantes no arquivo answers.json usando a API do GitHub
-    const jsonData = JSON.stringify(participants);
+    const jsonData = JSON.stringify(participantes);
     const githubApiUrl = 'https://api.github.com/repos/SauloMarcuz/rifa-isis/contents/answers.json';
     const githubToken = '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';
 
@@ -89,21 +89,9 @@ function submitRaffleForm() {
       body: JSON.stringify({
         message: 'Atualizar arquivo answers.json',
         content: btoa(jsonData),
-        branch: 'main',
+        branch: 'principal',
       }),
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Dados salvos com sucesso!');
-      })
-      .catch(error => {
-        console.error('Erro ao salvar os dados:', error);
-      });
-  } else {
-    alert('Por favor, preencha o nome e selecione pelo menos um número.');
-  }
-}
-
-// Inicialização da página
-updateSelectedNumbers();
-updateParticipantList();
+        console.log('Dados salvos com sucesso
