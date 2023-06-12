@@ -77,7 +77,7 @@ function submitRaffleForm() {
     // Salvar os participantes no arquivo answers.json usando a API do GitHub
     const jsonData = JSON.stringify(participants);
     const githubApiUrl = 'https://api.github.com/repos/SauloMarcuz/rifa-isis/contents/answers.json';
-    const githubToken = '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';
+    const githubToken = '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';
 
     fetch(githubApiUrl, {
       method: 'PUT',
