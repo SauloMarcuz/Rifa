@@ -1,6 +1,6 @@
 const formEntrada = document.getElementById('name');
 const numberContainer = document.querySelector('.numbers-container');
-const participanteLista = document.getElementById('participant-list');
+const participanteLista = document.getElementById('lista-participantes'); // Alterado para "lista-participantes"
 
 const numeros = Array.from({ length: 100 }, (_, i) => i + 1);
 let numerosSelecionados = [];
@@ -89,21 +89,9 @@ function submitRaffleForm() {
       body: JSON.stringify({
         message: 'Atualizar arquivo answers.json',
         content: btoa(jsonData),
-        branch: 'principal',
+        branch: 'Saulo',
       }),
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Dados salvos com sucesso!');
-      })
-      .catch(error => {
-        console.error('Erro ao salvar os dados:', error);
-      });
-  } else {
-    alert('Por favor, preencha o nome e selecione pelo menos um número.');
-  }
-}
-
-// Inicialização da página
-atualizarNumerosSelecionados();
-atualizarListaParticipantes();
+        console
