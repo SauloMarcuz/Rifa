@@ -1,101 +1,95 @@
 body {
-  background-color: #FCEFF7;
-  color: #7F007F;
-  text-align: center;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f3f3f3;
 }
 
 .title {
-  color: #7F007F;
+  text-align: center;
   margin-top: 20px;
 }
 
 .prize-info {
+  text-align: center;
   margin-bottom: 20px;
 }
 
 .prize-text {
-  color: #7F007F;
+  margin: 5px;
 }
 
 .instructions {
+  text-align: center;
   margin-bottom: 20px;
 }
 
 .instructions-text {
-  color: #7F007F;
+  font-weight: bold;
 }
 
 .instructions-list {
-  color: #7F007F;
-  text-align: left;
+  margin: 0;
+  padding-left: 20px;
 }
 
 .raffle-board {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .numbers-container {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  grid-gap: 10px;
-  justify-items: center;
+  gap: 10px;
+  width: 400px;
+  margin-top: 20px;
 }
 
 .number {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40px;
   height: 40px;
-  line-height: 40px;
-  margin: 5px;
-  border: 1px solid #7F007F;
-  border-radius: 50%;
-  background-color: #FCEFF7;
-  color: #7F007F;
+  background-color: #fff;
+  border: 1px solid #ccc;
   cursor: pointer;
 }
 
 .number.selected {
-  background-color: #7F007F;
-  color: #FCEFF7;
-}
-
-.number[selected] {
-  background-color: #7F007F;
-  color: #FCEFF7;
-  pointer-events: none;
+  background-color: #ffcc00;
 }
 
 .participant-form {
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .form-label {
-  display: block;
-  margin-bottom: 10px;
-  color: #7F007F;
+  margin-right: 10px;
 }
 
 .form-input {
+  width: 200px;
   padding: 5px;
 }
 
 .form-button {
   padding: 5px 10px;
-  background-color: #7F007F;
-  color: #FCEFF7;
+  background-color: #4caf50;
+  color: #fff;
   border: none;
   cursor: pointer;
 }
 
 .participant-list {
   margin-top: 20px;
-  text-align: left;
-  list-style-type: none;
+  padding-left: 20px;
 }
 
 .list-item {
   margin-bottom: 5px;
-  color: #7F007F;
 }
