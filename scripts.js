@@ -11,21 +11,21 @@ function atualizarNumerosSelecionados() {
   numberContainer.innerHTML = '';
 
   numeros.forEach(numero => {
-    const numeroElemento = document.createElement('div');
+    const numeroElemento = document.createElement('span');
     numeroElemento.classList.add('number');
     numeroElemento.textContent = numero;
 
     if (numerosSelecionados.includes(numero) || isNumeroUtilizado(numero)) {
-      numeroElemento.classList.add('selecionado');
-      numeroElemento.setAttribute('disabled', true);
+      numeroElemento.classList.add('selected');
+      numeroElemento.setAttribute('selected', true);
     }
 
     numeroElemento.addEventListener('click', () => {
-      if (!numeroElemento.classList.contains('selecionado')) {
-        numeroElemento.classList.add('selecionado');
+      if (!numeroElemento.classList.contains('selected')) {
+        numeroElemento.classList.add('selected');
         numerosSelecionados.push(numero);
       } else {
-        numeroElemento.classList.remove('selecionado');
+        numeroElemento.classList.remove('selected');
         numerosSelecionados = numerosSelecionados.filter(n => n !== numero);
       }
     });
@@ -50,7 +50,7 @@ function atualizarListaParticipantes() {
 
   participantes.forEach(participante => {
     const itemLista = document.createElement('li');
-    itemLista.classList.add('item-lista');
+    itemLista.classList.add('list-item');
     itemLista.textContent = `${participante.nome} - Números: ${participante.numeros.join(', ')}`;
 
     participanteLista.appendChild(itemLista);
@@ -59,8 +59,7 @@ function atualizarListaParticipantes() {
 
 // Função para confirmar uma participação
 function submitRaffleForm() {
-  const nome = document.getElementById('name').value.trim();
-
+  const nome = formEntrada.value.trim();
 
   if (nome && numerosSelecionados.length > 0) {
     const participante = {
