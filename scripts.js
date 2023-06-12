@@ -17,7 +17,7 @@ function atualizarNumerosSelecionados() {
 
     if (numerosSelecionados.includes(numero) || isNumeroUtilizado(numero)) {
       numeroElemento.classList.add('selecionado');
-      numeroElemento.setAttribute('desabilitado', true);
+      numeroElemento.setAttribute('disabled', true);
     }
 
     numeroElemento.addEventListener('click', () => {
@@ -86,24 +86,3 @@ function enviarFormularioRifa() {
         Accept: 'application/vnd.github.v3+json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        message: 'Atualizar arquivo answers.json',
-        content: btoa(jsonData),
-        branch: 'principal',
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Dados salvos com sucesso');
-      })
-      .catch(error => {
-        console.error('Erro ao salvar os dados:', error);
-      });
-  } else {
-    alert('Por favor, preencha o nome e selecione pelo menos um número.');
-  }
-}
-
-// Inicialização da página
-atualizarNumerosSelecionados();
-atualizarListaParticipantes();
